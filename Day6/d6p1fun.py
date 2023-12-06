@@ -1,13 +1,20 @@
 import time
+import sys
+import time
+
+def spinning_cursor():
+    while True:
+        for cursor in '|/-\\':
+            yield cursor
+
+spinner = spinning_cursor()
 
 
 #following globals all used for timer and printing a spinner while calculating
 start = time.time()
 current_time=0
 buf_arg = 0
-c = 43
-newc=215
-oldc=0
+
 
 #timer (got to be a better way to do this without globals)
 def is_time(t):
@@ -29,20 +36,18 @@ def strtointlist(s): #make sure we are dealing with ints NOT strings in the list
 def wins(t,d):
     global c,newc,oldc
     wins = 0
-    flip_char = False
 
     for i in range(t + 1):
-        current_time = time.time()
-        if is_time(0.25): #print a spinning +
-            flip_char = not flip_char
-            if flip_char:
-                oldc = c
-                c = newc
-                newc = oldc
-            print('\b', end=chr(c), flush=True)                          
+        
+        #print a spinning cursor character
+        if is_time(0.15):
+            print('\b', end=next(spinner), flush=True)        
+        
+        #actual calculation                  
         distance = (t - i) * i
         if distance > d:
             wins += 1
+
     return wins
 
 ttl1 = -1
@@ -52,6 +57,7 @@ data = file.read()
 
 times = strtointlist(t.removeprefix('Time:').split())
 distance =  strtointlist(d.removeprefix('Distance:').split())
+
 i=0
 for n in times:
     if ttl1 < 0: #find the first one
