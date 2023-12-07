@@ -1,27 +1,5 @@
-import time
-import itertools
-
-#following globals all used for timer and printing a spinner while calculating
-start = time.time()
-current_time=0
-spinner = itertools.cycle('-/|\\')
-
-#timer (got to be a better way to do this without globals)
-def is_time(t):
-    global start, current_time
-    current_time = time.time()
-    if (current_time - start >= t):
-        start = current_time
-        return True
-    else:
-        return False
-    
-def strtointlist(s): #make sure we are dealing with ints NOT strings in the list
-    i=0
-    for n in s:
-        s[i]=int(n)
-        i+=1
-    return s
+from timedspinner import printspin 
+from mytools import strtointlist
 
 def wins(t,d):
     wins = 0
@@ -29,9 +7,8 @@ def wins(t,d):
     for i in range(t + 1):
         
         #print a spinning cursor character
-        if is_time(0.15):
-            print('\b', end=next(spinner), flush=True)        
-        
+        printspin(0.15)    
+
         #actual calculation                  
         distance = (t - i) * i
         if distance > d:
@@ -54,6 +31,6 @@ for n in times:
     else: #multiply the rest
         ttl1= ttl1*wins(times[i],distance[i]) 
     i+=1
-print ('\n',ttl1)
+print ('\b',ttl1)
 
 
