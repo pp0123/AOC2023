@@ -1,17 +1,11 @@
 import time
-
-def spinning_cursor():
-    while True:
-        for cursor in '|/-\\':
-            yield cursor
-
-spinner = spinning_cursor()
-
+import itertools
 
 #following globals all used for timer and printing a spinner while calculating
 start = time.time()
 current_time=0
-buf_arg = 0
+spinner = itertools.cycle('-/|\\')
+
 
 
 #timer (got to be a better way to do this without globals)
