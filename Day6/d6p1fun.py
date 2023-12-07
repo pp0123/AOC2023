@@ -6,8 +6,6 @@ start = time.time()
 current_time=0
 spinner = itertools.cycle('-/|\\')
 
-
-
 #timer (got to be a better way to do this without globals)
 def is_time(t):
     global start, current_time
@@ -26,7 +24,6 @@ def strtointlist(s): #make sure we are dealing with ints NOT strings in the list
     return s
 
 def wins(t,d):
-    global c,newc,oldc
     wins = 0
 
     for i in range(t + 1):
