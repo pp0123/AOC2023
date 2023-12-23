@@ -12,7 +12,7 @@ with open("input.txt", "r") as file:
         for j in range(len(a)-1):
                 next_s.append(a[j+1]-(a[j]))
         
-        #if (sum(next_s)==0): #this does nto owrk and cost me hours  [3,6,9,-3,-15] also sums to zero!!!
+        #if (sum(next_s)==0): #this does not work and cost me hours  [3,6,9,-3,-15] also sums to zero!!!
         if all(x==0 for x in next_s):
              return(a[-1])
         else:
